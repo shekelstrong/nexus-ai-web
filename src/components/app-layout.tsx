@@ -127,7 +127,7 @@ export function AppLayout({
         </nav>
 
         {/* Main */}
-        <div className="flex-1 flex flex-col min-w-0 overflow-hidden">
+        <div className="flex-1 flex flex-col min-w-0 h-screen overflow-hidden">
           {children}
         </div>
       </div>
