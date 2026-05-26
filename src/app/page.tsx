@@ -1,9 +1,13 @@
 import ChatInterface from "@/components/chat-interface";
+import { AmbientBackground } from "@/components/ambient-background";
 
 export default function Home() {
   return (
-    <main className="flex h-screen w-full overflow-hidden">
-      <ChatInterface />
-    </main>
+    <>
+      <AmbientBackground />
+      <main className="flex h-screen w-full overflow-hidden relative">
+        <ChatInterface />
+      </main>
+    </>
   );
 }
