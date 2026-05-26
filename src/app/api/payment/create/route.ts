@@ -5,7 +5,7 @@ export async function POST(req: NextRequest) {
     const body = await req.json();
     const { amount, description, userId, telegramId } = body;
 
-    const plategaKey = process.env.PLATEGA_API_KEY;
+    const plategaKey = process.env.PLATEGA_API_KEY || process.env.PLATEGA_TOKEN;
     if (!plategaKey) {
       return NextResponse.json({ error: "Platega not configured" }, { status: 500 });
     }
