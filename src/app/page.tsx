@@ -1,13 +1,5 @@
-import ChatInterface from "@/components/chat-interface";
-import { AmbientBackground } from "@/components/ambient-background";
+import { redirect } from "next/navigation";
 
 export default function Home() {
-  return (
-    <>
-      <AmbientBackground />
-      <main className="flex h-screen w-full overflow-hidden relative">
-        <ChatInterface />
-      </main>
-    </>
-  );
+  redirect("/chat");
 }
