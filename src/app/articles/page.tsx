@@ -4,13 +4,12 @@ import { AmbientBackground } from "@/components/ambient-background";
 import {
   ArrowRight,
   BookOpen,
-  Bot,
   Calendar,
   Clock,
   User,
+  Bot,
 } from "lucide-react";
 
-// Demo articles (replace with CMS/fetch later)
 const ARTICLES = [
   {
     id: 1,
@@ -71,7 +70,6 @@ export default function ArticlesPage() {
       </nav>
 
       <main className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        {/* Page Header */}
         <div className="mb-12">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#7c6aff]/10 border border-[#7c6aff]/20 text-[#7c6aff] text-xs mb-6">
             <BookOpen className="w-3.5 h-3.5" />
@@ -85,7 +83,6 @@ export default function ArticlesPage() {
           </p>
         </div>
 
-        {/* Articles Grid */}
         <div className="space-y-6">
           {ARTICLES.map((article) => (
             <article
@@ -97,7 +94,7 @@ export default function ArticlesPage() {
                   <BookOpen className="w-6 h-6 text-[#7c6aff]" />
                 </div>
                 <div className="flex-1 min-w-0">
-                  <div className="flex items-center gap-3 mb-2">
+                  <div className="flex items-center gap-4 mb-2">
                     <span className="px-2 py-0.5 rounded bg-[#00d4ff]/10 text-[#00d4ff] text-xs font-medium">
                       {article.tag}
                     </span>
@@ -132,25 +129,8 @@ export default function ArticlesPage() {
             </article>
           ))}
         </div>
-
-        {/* More coming */}
-        <div className="mt-12 glass-panel p-8 rounded-2xl text-center">
-          <Bot className="w-10 h-10 text-[#7c6aff] mx-auto mb-4" />
-          <h3 className="text-lg font-semibold mb-2">Ещё больше материалов скоро</h3>
-          <p className="text-sm text-white/40 mb-4">
-            Подписывайтесь на наш Telegram-канал, чтобы первыми получать новые статьи.
-          </p>
-          <a
-            href="https://t.me/nexsai_bot"
-            target="_blank"
-            className="inline-flex items-center gap-2 text-[#7c6aff] hover:text-[#6b5ce7] text-sm font-medium transition-colors"
-          >
-            Открыть бота →
-          </a>
-        </div>
       </main>
 
-      {/* Footer */}
       <footer className="relative z-10 border-t border-white/[0.06] py-8 px-4 sm:px-6 lg:px-8">
         <div className="max-w-4xl mx-auto text-center text-sm text-white/30">
           © 2025 Nexus AI. Все права защищены.

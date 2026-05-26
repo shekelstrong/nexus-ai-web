@@ -10,12 +10,15 @@ import {
   User,
   Sparkles,
   Wallet,
+  BookOpen,
+  Home,
 } from "lucide-react";
 import { AmbientBackground } from "./ambient-background";
 
 const nav = [
   { href: "/chat", label: "Чат", icon: MessageSquare },
   { href: "/models", label: "Модели", icon: LayoutGrid },
+  { href: "/articles", label: "Статьи", icon: BookOpen },
   { href: "/pricing", label: "Тарифы", icon: CreditCard },
   { href: "/profile", label: "Профиль", icon: User },
 ];
@@ -38,13 +41,15 @@ export function AppLayout({ children }: { children: ReactNode }) {
           }}
         >
           <div className="flex items-center gap-2 px-5 pt-5 pb-3">
-            <div
-              className="w-8 h-8 rounded-lg flex items-center justify-center"
-              style={{ background: "linear-gradient(135deg, #7c6aff, #00d4ff)" }}
-            >
-              <Sparkles className="w-4 h-4 text-white" />
-            </div>
-            <span className="font-semibold tracking-tight">NexusAI</span>
+            <Link href="/" className="flex items-center gap-2 hover:opacity-80 transition-opacity">
+              <div
+                className="w-8 h-8 rounded-lg flex items-center justify-center"
+                style={{ background: "linear-gradient(135deg, #7c6aff, #00d4ff)" }}
+              >
+                <Sparkles className="w-4 h-4 text-white" />
+              </div>
+              <span className="font-semibold tracking-tight">NexusAI</span>
+            </Link>
           </div>
 
           <nav className="flex-1 px-3 mt-2 space-y-1">
