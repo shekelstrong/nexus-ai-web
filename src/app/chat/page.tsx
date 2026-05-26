@@ -1,10 +1,10 @@
 import { AppLayout } from "@/components/app-layout";
-import ChatPageClient from "@/components/chat-page-client";
+import ChatInterface from "@/components/chat-interface";
 
 export default function ChatPage() {
   return (
     <AppLayout>
-      <ChatPageClient />
+      <ChatInterface />
     </AppLayout>
   );
 }
