@@ -1,36 +1,64 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🌌 Nexus AI Web
 
-## Getting Started
+Модный веб-интерфейс для генерации ИИ-контента. Зеркало Telegram-бота **nexus_ai_bot**.
 
-First, run the development server:
+## ✨ Возможности
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+- 🤖 **Текст** — GPT-5.4, Claude Sonnet 4, Gemini 3 Pro, DeepSeek, Grok 3
+- 🎨 **Изображения** — FLUX 2 Pro, Yandex Art, Qwen Image
+- 🍌 **Nano Banana** — мгновенная генерация через Gemini Flash
+- 🎥 **Видео** — Seedance, VEO 3.1, WAN-2.6, Kling 3
+- 🔍 **Поиск** — Perplexity Sonar Pro, Deep Research
+- 💰 **Платежи** — интеграция с Platega (тот же webhook, что и в боте)
+
+## 🏗 Архитектура
+
+```
+Next.js 14 (App Router) + Tailwind CSS + shadcn/ui
+├── src/app/api/generate/route.ts     # Прокси для Polza AI / OpenRouter
+├── src/app/api/payment/create.ts     # Создание платежа через Platega
+├── src/app/api/webhook/platega.ts    # Webhook для платежей (пересылает в бот)
+├── src/app/api/auth/telegram.ts     # Авторизация через Telegram WebApp
+├── src/components/chat-interface.tsx  # Главный чат с боковой панелью
+├── src/components/model-selector.tsx # Выбор моделей (категории + семейства)
+├── src/data/models.ts                # Каталог моделей (зеркало бота)
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🚀 Деплой на Vercel
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+1. **Импортируй репозиторий** на [vercel.com](https://vercel.com)
+2. **Добавь Environment Variables:**
+   - `POLZA_AI_API_KEY` — ключ Polza AI
+   - `OPENROUTER_API_KEY` — ключ OpenRouter (fallback)
+   - `PLATEGA_API_KEY` — ключ платёжной системы
+   - `PLATEGA_WEBHOOK_SECRET` — секрет для webhook подписи
+   - `BOT_WEBHOOK_URL` — URL бота для пересылки платежей
+   - `NEXT_PUBLIC_APP_URL` — URL сайта (для редиректов)
+3. **Deploy**
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 🔗 Связь с ботом
 
-## Learn More
+- **Единый каталог моделей** — обновления моделей в боте автоматически отражаются на сайте (нужен ручной sync `model_config.py` → `src/data/models.ts`)
+- **Единый контекст** — история сообщений сохраняется при переключении между моделями
+- **Единый баланс** — пополнение через Platega на сайте обновляет баланс в боте (через webhook)
 
-To learn more about Next.js, take a look at the following resources:
+## 🛠 Локальная разработка
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+cd nexus-ai-web
+npm install
+npm run dev
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 📦 Стек
 
-## Deploy on Vercel
+- Next.js 14 (App Router)
+- Tailwind CSS
+- shadcn/ui
+- Framer Motion (анимации)
+- react-markdown (рендеринг ответов)
+- lucide-react (иконки)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+---
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Built with 💜 by Nexus AI Team
