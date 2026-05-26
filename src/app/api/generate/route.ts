@@ -5,33 +5,45 @@ export async function POST(req: NextRequest) {
     const body = await req.json();
     const { model, category, prompt, messages, imageUrl, videoParams } = body;
 
-    const apiKey = process.env.POLZA_AI_API_KEY || process.env.OPENROUTER_API_KEY;
-    if (!apiKey) {
+    const polzaKey = process.env.POLZA_AI_API_KEY;
+    const openrouterKey = process.env.OPENROUTER_API_KEY;
+
+    if (!polzaKey && !openrouterKey) {
       return NextResponse.json({ error: "API key not configured" }, { status: 500 });
     }
 
     // Determine endpoint and payload based on category
     let url: string;
     let payload: any;
+    let apiKey: string;
     let headers: Record<string, string> = {
-      "Authorization": `Bearer ${apiKey}`,
       "Content-Type": "application/json",
       "HTTP-Referer": "https://nexus-ai-web.vercel.app",
       "X-Title": "Nexus AI Web",
     };
 
     if (category === "gen_text" || category === "gen_search") {
-      // Text via OpenRouter or Polza Chat API
+      // Text via OpenRouter
+      if (!openrouterKey) {
+        return NextResponse.json({ error: "OpenRouter API key not configured" }, { status: 500 });
+      }
+      apiKey = openrouterKey;
       url = "https://openrouter.ai/api/v1/chat/completions";
+      headers["Authorization"] = `Bearer ${apiKey}`;
       payload = {
         model,
-        messages: messages.slice(-20), // Keep last 20 messages for context
+        messages: messages.slice(-20),
         temperature: 0.7,
         max_tokens: 4000,
       };
     } else if (category === "gen_image" || category === "gen_nano_banana") {
       // Image via Polza AI Media API
+      if (!polzaKey) {
+        return NextResponse.json({ error: "Polza API key not configured" }, { status: 500 });
+      }
+      apiKey = polzaKey;
       url = "https://polza.ai/api/v1/media";
+      headers["Authorization"] = `Bearer ${apiKey}`;
       payload = {
         model,
         input: {
@@ -43,7 +55,12 @@ export async function POST(req: NextRequest) {
       };
     } else if (category === "gen_video") {
       // Video via Polza AI Media API
+      if (!polzaKey) {
+        return NextResponse.json({ error: "Polza API key not configured" }, { status: 500 });
+      }
+      apiKey = polzaKey;
       url = "https://polza.ai/api/v1/media";
+      headers["Authorization"] = `Bearer ${apiKey}`;
       payload = {
         model,
         input: {
