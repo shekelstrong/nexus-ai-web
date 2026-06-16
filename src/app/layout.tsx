@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import "./glass.css";
+import "./hero.css";
 
 export const metadata: Metadata = {
   title: "NexusAI — единый интерфейс к лучшим нейросетям",
